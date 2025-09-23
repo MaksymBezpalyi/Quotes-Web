@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Random Quote Generator</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <main class="container">
+    <h1>Random Quote Generator</h1>
+    <div class="categories" role="tablist" aria-label="Quote categories">
+      <button class="category is-active" data-category="inspirational" role="tab" aria-selected="true">Inspirational</button>
+      <button class="category" data-category="funny" role="tab" aria-selected="false">Funny</button>
+      <button class="category" data-category="programming" role="tab" aria-selected="false">Programming</button>
+      <button class="category" data-category="movies" role="tab" aria-selected="false">Movies</button>
+      <button class="category" data-category="all" role="tab" aria-selected="false">All</button>
+    </div>
+    <div class="quote-row">
+      <button id="fav-btn" class="fav-btn" title="Add to favorites" aria-label="Add to favorites" type="button">★</button>
+      <div id="quote" class="quote" aria-live="polite"></div>
+    </div>
+    <img id="gif" class="gif" alt="Related GIF" hidden />
+    <button id="new-quote" type="button" aria-label="Generate a new quote">New Quote</button>
+    <section class="favorites" aria-label="Favorites">
+      <h2>Favorites</h2>
+      <ul id="favorites-list" class="favorites-list"></ul>
+    </section>
+  </main>
+  <script src="script.js"></script>
+  
+</body>
+</html>
+
+
