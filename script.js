@@ -1,4 +1,3 @@
-// Quotes array with at least 5 quotes (used as the Inspirational category)
 const quotes = [
   "The only way to do great work is to love what you do. — Steve Jobs",
   "Life is what happens when you're busy making other plans. — John Lennon",
@@ -143,7 +142,6 @@ const quotes = [
   "I am building a fire, and every day I train, I add more fuel. At just the right moment, I light the match. — Mia Hamm"
 ];
 
-// Additional categories
 const categories = {
   inspirational: quotes,
   funny: [
@@ -192,7 +190,6 @@ const categories = {
   ]
 };
 
-// Popular movie quotes with movie titles for GIF tagging
 const movieQuotes = [
   { text: "May the Force be with you.", author: "", movie: "Star Wars" },
   { text: "I'll be back.", author: "", movie: "The Terminator" },
@@ -255,11 +252,11 @@ async function loadQuoteAndGif() {
       const { text, author } = await fetchQuoteFromApi(selectedCategory);
       current = { text, author, movie: '' };
       applyQuote(`${text}${author ? ` — ${author}` : ''}`, quoteEl);
-      // If this API quote matches one of our movie quotes, use that movie tag
+     
       const maybeMovie = findMovieByQuoteText(text);
       if (maybeMovie) gifOverrideTag = maybeMovie;
     } catch (_) {
-      // Fallback to local quotes
+ 
       const fallback = getRandomQuote();
       current = { text: fallback, author: '', movie: '' };
       applyQuote(fallback, quoteEl);
@@ -269,7 +266,7 @@ async function loadQuoteAndGif() {
   }
 
   try {
-    // Try local GIF first (giphy/<quote>.gif). If it fails to load, fall back to API.
+
     const localUrl = getLocalGifUrlForQuote(current.text);
     let usedLocal = false;
     if (localUrl) {
@@ -295,7 +292,7 @@ async function loadQuoteAndGif() {
       };
       gifEl.onerror = handleError;
       gifEl.src = localUrl;
-      // crossfade in after load
+   
       gifEl.onload = () => {
         requestAnimationFrame(() => gifEl.classList.remove('is-hidden'));
       };
@@ -320,11 +317,10 @@ async function loadQuoteAndGif() {
     gifEl.hidden = true;
     gifEl.removeAttribute('src');
   } finally {
-    // Update background color smoothly
+  
     document.body.style.background = getRandomBackgroundGradient();
     setLoading(false, { quoteEl, gifEl, newQuoteBtn });
 
-    // Update favorite button state for current quote
     if (favBtn) {
       const isFav = isFavorite(current);
       favBtn.classList.toggle('active', isFav);
@@ -338,7 +334,7 @@ async function loadQuoteAndGif() {
 }
 
 function applyQuote(text, quoteEl) {
-  // Simple opacity crossfade for smoother feel
+ 
   quoteEl.classList.add('is-hidden');
   setTimeout(() => {
     quoteEl.textContent = text;
@@ -360,7 +356,7 @@ function setLoading(isLoading, refs) {
   }
 }
 
-// API Ninjas
+
 const API_NINJAS_KEY = 'yG3ovtTC3PW2D5NFuBsP8A==9yVpYsB8C2tVg8z1';
 
 async function fetchQuoteFromApi(category) {
@@ -390,7 +386,7 @@ function mapCategoryToApiNinjasCategory(category) {
     case 'programming':
       return 'computers';
     case 'movies':
-      // No strict movies category; let movie list handle this
+  
       return '';
     case 'all':
     default:
@@ -398,7 +394,7 @@ function mapCategoryToApiNinjasCategory(category) {
   }
 }
 
-// Provide your Giphy API key here. Create one at https://developers.giphy.com/
+
 const GIPHY_API_KEY = 'BtcgHxIb9f1sAvFOWZGdUv6Wd1e9S295';
 
 async function fetchGifForCategory(category, overrideTag = '') {
@@ -446,30 +442,28 @@ function findMovieByQuoteText(text) {
 
 function getLocalGifUrlForQuote(text) {
   if (!text) return '';
-  // Encode filename to handle spaces and punctuation
+
   const encoded = encodeURIComponent(text);
   return `giphy/${encoded}.gif`;
 }
 
-// Set up event listener after DOM is ready
+
 window.addEventListener('DOMContentLoaded', () => {
   const button = document.getElementById('new-quote');
   button.addEventListener('click', () => {
     displayRandomQuote();
   });
 
-  // Load favorites from storage and render
+
   loadFavoritesFromStorage();
   renderFavorites();
 
-  // Category buttons
   const categoryButtons = document.querySelectorAll('.category');
   categoryButtons.forEach((btn) => {
     btn.addEventListener('click', () => {
       const newCategory = btn.getAttribute('data-category');
       selectedCategory = newCategory || 'inspirational';
 
-      // Update active styles and aria-selected
       categoryButtons.forEach((b) => {
         const isActive = b === btn;
         b.classList.toggle('is-active', isActive);
@@ -480,7 +474,6 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Initial display
   displayRandomQuote();
 });
 
@@ -490,7 +483,7 @@ function getRandomBackgroundGradient() {
   return `linear-gradient(180deg, ${colorA} 0%, ${colorB} 100%)`;
 }
 
-// Favorites management
+
 const FAVORITES_STORAGE_KEY = 'rqg_favorites_v1';
 let favorites = [];
 
