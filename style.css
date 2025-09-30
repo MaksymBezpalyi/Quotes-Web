@@ -140,7 +140,7 @@ h1 {
   justify-content: space-between;
 }
 
-/* GIF/Image styling */
+
 .gif {
   max-width: 420px;
   width: 100%;
@@ -153,13 +153,13 @@ h1 {
   transition: opacity 520ms ease-in-out, filter 320ms ease;
 }
 
-/* Loading state */
+
 .loading {
   opacity: 0.55;
   filter: saturate(0.7) blur(0.2px);
 }
 
-/* Crossfade helpers */
+
 .is-hidden {
   opacity: 0 !important;
 }
@@ -192,7 +192,6 @@ button:active {
   }
 }
 
-/* Fade-in animation for quote */
 .fade-in {
   animation: fadeIn 420ms ease forwards;
 }
