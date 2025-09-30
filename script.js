@@ -552,7 +552,7 @@ function saveFavoritesToStorage() {
   try {
     localStorage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify(favorites));
   } catch (_) {
-    // ignore
+
   }
 }
 
